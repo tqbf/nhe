@@ -16,10 +16,10 @@
   </header>
 
   <div class="relative overflow-x-auto shadow-md rounded-lg">
-    <table class="table-auto text-left">
+    <table class="text-left" style="width: max-content;">
       <thead class="uppercase bg-[#919db6] text-[#e5e7eb]">
         <tr>
-          <th class="py-2 border border-gray-300 text-center p-4 sticky left-0 bg-[#919db6] z-10">Category</th>
+          <th class="py-2 border border-gray-300 text-center p-4 md:sticky md:left-0 md:bg-[#919db6] md:z-10">Category</th>
           {{range .Years}}
           <th class="py-2 border border-gray-300 text-center p-4 whitespace-nowrap">{{.}}</th>
           {{end}}
@@ -28,7 +28,7 @@
       <tbody class="bg-white text-gray-500">
         {{range $catIdx, $cat := .Categories}}
         <tr class="py-5">
-          <td class="py-5 border border-gray-300 p-4 sticky left-0 bg-white z-10 whitespace-nowrap">
+          <td class="py-5 border border-gray-300 p-4 md:sticky md:left-0 md:bg-white md:z-10 whitespace-nowrap">
             {{if eq $cat.Name "Total National Health Expenditures"}}
               {{$cat.Name}}
             {{else if eq $cat.Name "Total Nursing Care Facilities and Continuing Care Retirement Communities"}}
