@@ -682,26 +682,36 @@ func serveCmd(app *App, c *cli.Context) error {
 				return "bg-gray-100"
 			}
 			if amount == nil {
-				return "bg-white"
+				return "bg-gray-100"
 			}
 			total, ok := totals[year]
 			if !ok || total == nil || *total == 0 {
-				return "bg-white"
+				return "bg-gray-100"
 			}
 			pct := float64(*amount) / float64(*total) * 100
 
-			if pct < 5 {
-				return "bg-blue-200"
-			} else if pct < 10 {
-				return "bg-blue-100"
-			} else if pct < 15 {
-				return "bg-white"
-			} else if pct < 20 {
-				return "bg-orange-100"
-			} else if pct < 25 {
-				return "bg-orange-200"
-			} else {
+			if pct >= 15 {
 				return "bg-red-200"
+			} else if pct >= 13.5 {
+				return "bg-orange-200"
+			} else if pct >= 12 {
+				return "bg-amber-200"
+			} else if pct >= 10.5 {
+				return "bg-yellow-200"
+			} else if pct >= 9 {
+				return "bg-lime-200"
+			} else if pct >= 7.5 {
+				return "bg-green-200"
+			} else if pct >= 6 {
+				return "bg-teal-200"
+			} else if pct >= 4.5 {
+				return "bg-cyan-200"
+			} else if pct >= 3 {
+				return "bg-sky-200"
+			} else if pct >= 1.5 {
+				return "bg-blue-200"
+			} else {
+				return "bg-blue-200"
 			}
 		},
 	}
