@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>National Health Expenditures</title>
+  <link rel="stylesheet" href="/static/css/output.css">
+</head>
+<body class="bg-gray-50">
+<div class="max-w-7xl mx-auto px-4 py-8">
+  <header class="mb-8">
+    <h1 class="text-4xl font-bold text-gray-900 mb-2">National Health Expenditures</h1>
+    <p class="text-gray-600">Major category expenditures by year (in millions of dollars)</p>
+  </header>
+
+  <div class="relative overflow-x-auto shadow-md rounded-lg">
+    <table class="table-auto text-left">
+      <thead class="uppercase bg-[#919db6] text-[#e5e7eb]">
+        <tr>
+          <th class="py-2 border border-gray-300 text-center p-4 sticky left-0 bg-[#919db6] z-10">Category</th>
+          {{range .Years}}
+          <th class="py-2 border border-gray-300 text-center p-4 whitespace-nowrap">{{.}}</th>
+          {{end}}
+        </tr>
+      </thead>
+      <tbody class="bg-white text-gray-500">
+        {{range $catIdx, $cat := .Categories}}
+        <tr class="py-5">
+          <td class="py-5 border border-gray-300 p-4 sticky left-0 bg-white z-10 whitespace-nowrap">
+            {{if eq $cat.Name "Total National Health Expenditures"}}
+              {{$cat.Name}}
+            {{else if eq $cat.Name "Total Nursing Care Facilities and Continuing Care Retirement Communities"}}
+              Nursing and Continuing Care
+            {{else if eq $cat.Name "Total Administration and Total Net Cost of Health Insurance Expenditures"}}
+              Administration and Net Cost of Health Insurance
+            {{else}}
+              {{trimPrefix $cat.Name "Total "}}
+            {{end}}
+          </td>
+          {{range $idx, $val := $cat.Values}}
+          <td class="py-5 border border-gray-300 text-center p-4 whitespace-nowrap {{heatmapColor $val (index $.Years $idx) $.Totals $catIdx}}">
+            {{if $val}}
+              {{if eq $cat.Name "Total National Health Expenditures"}}
+                <div class="text-lg font-semibold text-gray-900">{{formatNumber $val}}</div>
+                <div class="text-xs text-gray-500">{{formatPercent $val (index $.Years $idx) $.Totals}}</div>
+              {{else}}
+                <div class="text-lg font-semibold text-gray-900">{{formatPercent $val (index $.Years $idx) $.Totals}}</div>
+                <div class="text-xs text-gray-500">{{formatNumber $val}}</div>
+              {{end}}
+            {{else}}
+              <span class="text-gray-400">N/A</span>
+            {{end}}
+          </td>
+          {{end}}
+        </tr>
+        {{end}}
+      </tbody>
+    </table>
+  </div>
+</div>
+</body>
+</html>

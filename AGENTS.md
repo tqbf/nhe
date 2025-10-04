@@ -1,7 +1,15 @@
 ### This repo
 
-This is a skeleton for Go projects with common prereqs set up. It might be the basis for
-a CLI program, a TUI, or a web server.
+This is a static website that will host visual data associated with the 
+US CMS National Health Expenditure.
+
+* sqlite for the backend
+* tailwind css (NOT CDN hosted; with the full build process)
+* make-driven build
+* standard go net/http
+* no login, users, anything like that
+* simple go templates
+* use separate files for templates, no inline templates inside .go files; use go:embed
 
 ### Basic stuff
 * never write comments
